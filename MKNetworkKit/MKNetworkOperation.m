@@ -83,6 +83,8 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
 
 @property (nonatomic, assign) SecTrustRef serverTrust;
 
+@property (nonatomic, copy) NSData *httpbodyData;
+
 #if TARGET_OS_IPHONE
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgroundTaskId;
 #endif
@@ -729,6 +731,11 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
 }
 
 
+-(void) setHttpBodyData:(NSData*) data
+{
+    [self setHttpbodyData:data];
+}
+
 -(void) addData:(NSData*) data forKey:(NSString*) key {
   
   [self addData:data forKey:key mimeType:@"application/octet-stream" fileName:@"file"];
@@ -768,6 +775,11 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
 
 -(NSData*) bodyData {
   
+  if (self.httpbodyData)
+  {
+      return self.httpbodyData;
+  }
+    
   if([self.filesToBePosted count] == 0 && [self.dataToBePosted count] == 0) {
     
     return [[self encodedPostDataString] dataUsingEncoding:self.stringEncoding];

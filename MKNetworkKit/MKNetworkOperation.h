@@ -451,6 +451,15 @@ typedef enum {
 -(void) addData:(NSData*) data forKey:(NSString*) key mimeType:(NSString*) mimeType fileName:(NSString*) fileName;
 
 /*!
+ *  @abstract Sets the body of the http request to send binary data
+ *
+ *  @discussion
+ *	This method sets the body of the http request.
+ */
+-(void) setHttpBodyData:(NSData*) data;
+
+
+/*!
  *  @abstract Block Handler for completion and error
  *  
  *  @discussion
