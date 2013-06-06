@@ -205,14 +205,14 @@ static NSOperationQueue *_sharedNetworkQueue;
 
 -(void) reachabilityChanged:(NSNotification*) notification
 {
-  if([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
+  if([self.reachability currentReachabilityStatus] == MKReachableViaWiFi)
   {
     DLog(@"Server [%@] is reachable via Wifi", self.hostName);
     [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
     
     [self checkAndRestoreFrozenOperations];
   }
-  else if([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
+  else if([self.reachability currentReachabilityStatus] == MKReachableViaWWAN)
   {
     if(self.wifiOnlyMode) {
       
@@ -224,7 +224,7 @@ static NSOperationQueue *_sharedNetworkQueue;
       [self checkAndRestoreFrozenOperations];
     }
   }
-  else if([self.reachability currentReachabilityStatus] == NotReachable)
+  else if([self.reachability currentReachabilityStatus] == MKNotReachable)
   {
     DLog(@"Server [%@] is not reachable", self.hostName);
     [self freezeOperations];
@@ -318,7 +318,7 @@ static NSOperationQueue *_sharedNetworkQueue;
 
 -(BOOL) isReachable {
   
-  return ([self.reachability currentReachabilityStatus] != NotReachable);
+  return ([self.reachability currentReachabilityStatus] != MKNotReachable);
 }
 
 #pragma mark -
@@ -511,7 +511,7 @@ static NSOperationQueue *_sharedNetworkQueue;
       [_sharedNetworkQueue addOperation:operation];
     }
     
-    if([self.reachability currentReachabilityStatus] == NotReachable)
+    if([self.reachability currentReachabilityStatus] == MKNotReachable)
       [self freezeOperations];
   });
 }

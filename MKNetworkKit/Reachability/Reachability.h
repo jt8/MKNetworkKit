@@ -66,10 +66,10 @@ extern NSString *const kReachabilityChangedNotification;
 typedef enum 
 {
 	// Apple NetworkStatus Compatible Names.
-	NotReachable     = 0,
-	ReachableViaWiFi = 2,
-	ReachableViaWWAN = 1
-} NetworkStatus;
+	MKNotReachable     = 0,
+	MKReachableViaWiFi = 2,
+	MKReachableViaWWAN = 1
+} MKNetworkStatus;
 
 @class Reachability;
 
@@ -107,7 +107,7 @@ typedef void (^NetworkUnreachable)(Reachability * reachability);
 // Is user intervention required?
 -(BOOL)isInterventionRequired;
 
--(NetworkStatus)currentReachabilityStatus;
+-(MKNetworkStatus)currentReachabilityStatus;
 -(SCNetworkReachabilityFlags)reachabilityFlags;
 -(NSString*)currentReachabilityString;
 -(NSString*)currentReachabilityFlags;
