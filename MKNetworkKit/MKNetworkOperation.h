@@ -698,4 +698,7 @@ typedef enum {
 - (id)initWithURLString:(NSString *)aURLString
                  params:(NSDictionary *)params
              httpMethod:(NSString *)method;
+
+- (id) initWithCoder:(NSCoder *)decoder;
+- (void) encodeWithCoder:(NSCoder *)encoder;
 @end
